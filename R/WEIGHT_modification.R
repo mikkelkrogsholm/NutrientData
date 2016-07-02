@@ -9,9 +9,9 @@
 WEIGHT <- lapply(unique(c(WEIGHT$NDB_No, FOOD_DES$NDB_No)), function(ndb_no) {
   wgt <- filter(WEIGHT, NDB_No == ndb_no)
   # if no record exists, seq = 1; if records do exist, seq = max(Seq) + 1
-  seq <- ifelse(nrow(wgts) > 0, as.character(max(as.numeric(wgts$Seq)) + 1), '1')
+  seq <- ifelse(nrow(wgt) > 0, as.character(max(as.numeric(wgt$Seq)) + 1), '1')
   gram_weight <- data_frame(NDB_No = ndb_no, Seq = seq, Amount = 1, Msre_Desc = 'g', Gm_Wgt = 1, Num_Data_Pts = NA, Std_Dev = NA)
-  bind_rows(wgts, gram_weight)
+  bind_rows(wgt, gram_weight)
 }) %>%
   bind_rows %>%
   arrange(NDB_No, Seq)
